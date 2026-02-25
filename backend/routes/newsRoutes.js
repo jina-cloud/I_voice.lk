@@ -31,12 +31,8 @@ router.get('/scores', async (req, res) => {
         return res.json({ success: true, matches: [], message: 'No CRICAPI_KEY configured' });
     }
 
-    // List of Asian countries/regions to filter by
-    const ASIAN_TEAMS = [
-        'sri lanka', 'india', 'pakistan', 'bangladesh', 'afghanistan', 'nepal',
-        'oman', 'uae', 'united arab emirates', 'qatar', 'kuwait', 'bahrain',
-        'saudi arabia', 'malaysia', 'hong kong', 'singapore', 'thailand', 'japan', 'bhutan', 'china'
-    ];
+    // List of countries to filter by (Sri Lanka only)
+    const TARGET_TEAMS = ['sri lanka'];
 
     try {
         const { data } = await axios.get(
@@ -70,11 +66,11 @@ router.get('/scores', async (req, res) => {
             };
         });
 
-        // Filter: at least one team must match an Asian country
+        // Filter: at least one team must match Sri Lanka
         matches = matches.filter(match => {
             return match.teams.some(team => {
                 const tLower = team.toLowerCase();
-                return ASIAN_TEAMS.some(asian => tLower.includes(asian));
+                return TARGET_TEAMS.some(target => tLower.includes(target));
             });
         });
 
