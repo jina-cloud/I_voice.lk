@@ -1,7 +1,17 @@
+const mongoose = require('mongoose');
 const News = require('../models/News');
+
+// Helper: check DB is ready before querying
+const isDBReady = () => mongoose.connection.readyState === 1;
+const dbNotReady = (res) => res.status(503).json({
+    success: false,
+    message: 'Database connection not established yet. Please try again in a moment.'
+});
+
 
 // PUBLIC: Get all news (paginated, sorted by date DESC)
 exports.getAllNews = async (req, res) => {
+    if (!isDBReady()) return dbNotReady(res);
     try {
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 10;
@@ -29,6 +39,7 @@ exports.getAllNews = async (req, res) => {
 
 // PUBLIC: Get news by category label (sports, business, politics, opinion, entertainment, life, news)
 exports.getNewsByCategory = async (req, res) => {
+    if (!isDBReady()) return dbNotReady(res);
     try {
         const { category } = req.params;
         const page = parseInt(req.query.page) || 1;
@@ -66,6 +77,7 @@ exports.getNewsByCategory = async (req, res) => {
 
 // PUBLIC: Get single news article by custom string id
 exports.getSingleNews = async (req, res) => {
+    if (!isDBReady()) return dbNotReady(res);
     try {
         const rawId = req.params.id;
         // Try string match first; fall back to numeric in case stored as Number

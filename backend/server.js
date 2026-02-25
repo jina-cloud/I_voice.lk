@@ -8,9 +8,6 @@ const newsRoutes = require('./routes/newsRoutes');
 // Load environment variables
 dotenv.config();
 
-// Connect to Database
-connectDB();
-
 // Initialize Express App
 const app = express();
 
@@ -21,8 +18,12 @@ app.use(cors());
 // Mount Routes
 app.use('/api', newsRoutes);
 
-// Initialize Cron Job for automated fetching
-initCronJob();
+// Connect to DB first, then start cron job
+const startServer = async () => {
+  await connectDB(); // Wait until MongoDB is connected
+  initCronJob();     // Then start the automated cron fetcher
+};
+startServer();
 
 // Basic error handler
 app.use((err, req, res, next) => {
