@@ -2,6 +2,8 @@ import React from 'react';
 import NewsCard from './NewsCard';
 import HeroSlider from './HeroSlider';
 import MarketWidget from './MarketWidget';
+import LiveStreamPlayer from './LiveStreamPlayer';
+import LiveScoreboard from './LiveScoreboard';
 import ElectionResults from './ElectionResults';
 
 // Skeleton loader
@@ -81,9 +83,11 @@ const NewsGrid = ({ articles, loading }) => {
             {/* ── SECTION 2: Market Widget + 6 cards ────────────────────── */}
             <section className="mb-0">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 items-start">
-                    {/* MarketWidget */}
-                    <div className="lg:col-span-3 lg:border-r border-gray-200 lg:pr-6 pb-6 lg:pb-0">
+                    {/* MarketWidget, Stream, Scoreboard */}
+                    <div className="lg:col-span-3 lg:border-r border-gray-200 lg:pr-6 pb-6 lg:pb-0 flex flex-col gap-6">
                         <MarketWidget />
+                        <LiveStreamPlayer />
+                        <LiveScoreboard />
                     </div>
                     {/* 6 cards: 3-col grid */}
                     <div className="lg:col-span-9 lg:pl-6">

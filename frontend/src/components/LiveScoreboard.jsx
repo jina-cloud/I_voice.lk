@@ -28,7 +28,7 @@ const LiveScoreboard = () => {
     }, []);
 
     return (
-        <div className="bg-gray-950 border-t border-gray-800">
+        <div className="rounded-xl overflow-hidden shadow-sm bg-gray-950">
             {/* Header */}
             <div className="flex items-center justify-between px-3 py-2 bg-[#0a1628]">
                 <div className="flex items-center gap-2">
