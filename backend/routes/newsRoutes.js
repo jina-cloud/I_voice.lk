@@ -30,12 +30,20 @@ router.get('/scores', async (req, res) => {
     if (!apiKey) {
         return res.json({ success: true, matches: [], message: 'No CRICAPI_KEY configured' });
     }
+
+    // List of Asian countries/regions to filter by
+    const ASIAN_TEAMS = [
+        'sri lanka', 'india', 'pakistan', 'bangladesh', 'afghanistan', 'nepal',
+        'oman', 'uae', 'united arab emirates', 'qatar', 'kuwait', 'bahrain',
+        'saudi arabia', 'malaysia', 'hong kong', 'singapore', 'thailand', 'japan', 'bhutan', 'china'
+    ];
+
     try {
         const { data } = await axios.get(
             `https://api.cricapi.com/v1/currentMatches?apikey=${apiKey}&offset=0`,
             { timeout: 6000 }
         );
-        const matches = (data.data || []).slice(0, 6).map(m => {
+        let matches = (data.data || []).map(m => {
             let parsedTeams = m.teams || [];
             // CricAPI sometimes gives 1 team if there's a comma in the name (e.g. "Hong Kong, China")
             if (parsedTeams.length !== 2) {
@@ -61,7 +69,17 @@ router.get('/scores', async (req, res) => {
                 dateTimeGMT: m.dateTimeGMT,
             };
         });
-        res.json({ success: true, matches });
+
+        // Filter: at least one team must match an Asian country
+        matches = matches.filter(match => {
+            return match.teams.some(team => {
+                const tLower = team.toLowerCase();
+                return ASIAN_TEAMS.some(asian => tLower.includes(asian));
+            });
+        });
+
+        // Return top 6 matches that passed the filter
+        res.json({ success: true, matches: matches.slice(0, 6) });
     } catch (err) {
         res.json({ success: false, matches: [], message: err.message });
     }
