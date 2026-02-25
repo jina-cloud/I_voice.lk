@@ -52,9 +52,9 @@ const Header = () => {
                 </div>
 
                 <div className="hidden md:flex items-center gap-6">
-                    <div className="text-right text-xs text-gray-500 font-sans border-r pr-6 border-gray-200 leading-relaxed">
-                        <p className="font-bold text-gray-800">Sri Lanka's</p>
-                        <p>Leading News Aggregator</p>
+                    <div className="text-right text-xs text-gray-500 font-sans border-r pr-6 border-gray-200 leading-relaxed max-w-[200px] hidden lg:block">
+                        <p className="font-bold text-gray-800">Youth-led</p>
+                        <p>Citizen Journalism</p>
                     </div>
                     <button aria-label="Search" className="text-gray-500 hover:text-black transition-colors">
                         <Search size={20} />

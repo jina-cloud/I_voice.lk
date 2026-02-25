@@ -94,9 +94,17 @@ function HomePage() {
                         <div className="mb-4">
                             <img src="/logo.png" alt="iVoice Logo" className="h-10 w-auto filter brightness-0 invert" />
                         </div>
-                        <p className="text-gray-400 text-sm max-w-sm">
-                            Sri Lanka's leading independent news aggregator, delivering breaking news, analysis, and insights.
-                        </p>
+                        <div className="text-gray-400 text-[13px] leading-relaxed max-w-lg space-y-3">
+                            <p>
+                                Welcome to Ivoice, an independent digital platform dedicated to promoting evidence based,ethical youth led citizen journalism. We focus on human rights violations,governance issues and social issues affecting women,youth,minorities and marginalized groups, particularly in the rural settings.
+                            </p>
+                            <p>
+                                Our mission is to empower citizen by providing them with the tools and knowledge needed to report on and address these critical issues through interactive sessions,we help individuals learn about human rights and digital citizenship fostering a more informed and engaged community.
+                            </p>
+                            <p>
+                                Ivoice is conceptualized and developed by the Sri Lanka Development Journalist Forum (SDJF) with the support of the Commonwealth Foundation. Our platform is committed to amplifying the voices of the unheard and driving meaningful change through the power of citizen journalism.
+                            </p>
+                        </div>
                     </div>
                     <div>
                         <h4 className="font-bold mb-4 uppercase tracking-wider text-sm text-gray-300">Sections</h4>
