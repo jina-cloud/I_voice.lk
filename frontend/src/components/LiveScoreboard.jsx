@@ -82,10 +82,21 @@ const LiveScoreboard = () => {
                         {/* Teams + scores */}
                         <div className="space-y-1">
                             {match.teams.map((team, i) => {
-                                const scoreEntry = match.score?.find(s => s.inning?.startsWith(team));
+                                // CricAPI inning strings are very inconsistent. Do a fuzzy case-insensitive match.
+                                const scoreEntry = match.score?.find(s => {
+                                    if (!s.inning) return false;
+                                    const teamLower = team.toLowerCase();
+                                    const inningLower = s.inning.toLowerCase();
+                                    // Sometimes inning is just " Inning 1" or joined names "Bahrain,Bhutan Inning 1".
+                                    // If we can't find a direct match, we try to map by index if there are exactly 2 scores.
+                                    return inningLower.includes(teamLower) || teamLower.includes(inningLower.replace(' inning 1', '').trim());
+                                }) || (match.score?.length === match.teams.length ? match.score[i] : null);
+
                                 return (
                                     <div key={i} className="flex items-center justify-between">
-                                        <span className="text-[11px] font-bold text-white truncate max-w-[100px]">{team}</span>
+                                        <span className="text-[11px] font-bold text-white truncate max-w-[100px]" title={team}>
+                                            {team}
+                                        </span>
                                         {scoreEntry ? (
                                             <span className="text-[11px] font-black font-mono text-emerald-400">
                                                 {scoreEntry.r}/{scoreEntry.w}
@@ -102,8 +113,8 @@ const LiveScoreboard = () => {
                         {/* Status */}
                         <div className="mt-1.5 pt-1.5 border-t border-gray-800">
                             <p className={`text-[9px] font-bold leading-tight ${match.status?.toLowerCase().includes('won') ? 'text-emerald-400' :
-                                    match.status?.toLowerCase().includes('live') || match.status?.toLowerCase().includes('progress') ? 'text-yellow-400' :
-                                        'text-gray-400'
+                                match.status?.toLowerCase().includes('live') || match.status?.toLowerCase().includes('progress') ? 'text-yellow-400' :
+                                    'text-gray-400'
                                 }`}>
                                 {match.status || 'In Progress'}
                             </p>

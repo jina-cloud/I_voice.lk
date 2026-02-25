@@ -35,16 +35,32 @@ router.get('/scores', async (req, res) => {
             `https://api.cricapi.com/v1/currentMatches?apikey=${apiKey}&offset=0`,
             { timeout: 6000 }
         );
-        const matches = (data.data || []).slice(0, 6).map(m => ({
-            id: m.id,
-            name: m.name,
-            status: m.status,
-            venue: m.venue,
-            teams: m.teams || [],
-            score: m.score || [],
-            matchType: m.matchType,
-            dateTimeGMT: m.dateTimeGMT,
-        }));
+        const matches = (data.data || []).slice(0, 6).map(m => {
+            let parsedTeams = m.teams || [];
+            // CricAPI sometimes gives 1 team if there's a comma in the name (e.g. "Hong Kong, China")
+            if (parsedTeams.length !== 2) {
+                const matchTitle = m.name.split(',')[0] + (m.name.split(',')[1] && m.name.split(',')[1].includes('vs') ? ',' + m.name.split(',')[1] : '');
+                let titleParts = matchTitle.split(' vs ');
+                if (titleParts.length !== 2) titleParts = matchTitle.split(' v ');
+                if (titleParts.length === 2) {
+                    parsedTeams = titleParts.map(t => t.trim().replace(/^,+|,+$/g, ''));
+                }
+            }
+            if (parsedTeams.length < 2) {
+                parsedTeams = [parsedTeams[0] || 'Team 1', 'Team 2'];
+            }
+
+            return {
+                id: m.id,
+                name: m.name,
+                status: m.status,
+                venue: m.venue,
+                teams: parsedTeams.slice(0, 2),
+                score: m.score || [],
+                matchType: m.matchType,
+                dateTimeGMT: m.dateTimeGMT,
+            };
+        });
         res.json({ success: true, matches });
     } catch (err) {
         res.json({ success: false, matches: [], message: err.message });
