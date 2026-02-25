@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Hls from 'hls.js';
+import LiveScoreboard from './LiveScoreboard';
 
 const EXCHANGE_RATES = [
     { code: 'USD', name: 'US Dollar', buy: 299.50, sell: 305.20, color: '#3b82f6' },
@@ -266,6 +267,9 @@ const MarketWidget = () => {
 
             {/* ── Live Sports Stream ─────────────────────────────── */}
             <LiveStreamPlayer />
+
+            {/* ── Live Scoreboard ────────────────────────────────── */}
+            <LiveScoreboard />
 
         </div>
     );
