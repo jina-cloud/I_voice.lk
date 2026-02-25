@@ -70,8 +70,8 @@ const CategoryPage = () => {
                         <span className="group-hover:-translate-x-1 transition-transform inline-block">←</span>
                         <span className="hidden sm:inline">Back to News</span>
                     </Link>
-                    <Link to="/" className="text-base font-black font-serif tracking-tighter hidden sm:block no-underline text-black">
-                        <span className="text-red-600">T</span>HE&nbsp;<span className="text-red-600">M</span>ORNING
+                    <Link to="/" className="flex items-center no-underline">
+                        <img src="/logo.png" alt="iVoice Logo" className="h-[28px] w-auto" />
                     </Link>
                     <div className="w-24" />
                 </div>
@@ -223,8 +223,11 @@ const CategoryPage = () => {
                 )}
             </main>
 
-            <footer className="bg-gray-900 text-white py-8 text-center font-sans text-xs text-gray-500 mt-12">
-                &copy; {new Date().getFullYear()} ivoice.lk. All rights reserved.
+            <footer className="bg-gray-900 text-white py-12 mt-12 flex flex-col items-center gap-4">
+                <img src="/logo.png" alt="iVoice Logo" className="h-8 w-auto filter brightness-0 invert opacity-80" />
+                <p className="font-sans text-xs text-gray-500 text-center">
+                    &copy; {new Date().getFullYear()} ivoice.lk. All rights reserved.
+                </p>
             </footer>
         </div>
     );
