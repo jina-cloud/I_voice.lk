@@ -242,6 +242,9 @@ const NewsDetail = () => {
                         onError={e => { e.target.parentElement.style.display = 'none'; }}
                     />
 
+                    {/* The new overlay image added dynamically */}
+                    <img src="/overlay.png" alt="" className="absolute inset-0 w-full h-full object-cover pointer-events-none z-10" />
+
                     {/* Loading overlay */}
                     {wmStatus === 'loading' && (
                         <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center z-20">
