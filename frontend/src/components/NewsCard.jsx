@@ -46,7 +46,7 @@ const NewsCard = ({ article, variant = 'default' }) => {
                                 className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-[1.03]"
                                 onError={e => { e.target.src = 'https://placehold.co/900x506/f3f4f6/9ca3af?text=The+Morning'; }}
                             />
-                            <img src="/overlay.png" alt="" className="absolute inset-0 w-full h-full object-cover pointer-events-none z-10" />
+                            <img src="/overlay-sub.png" alt="" className="absolute inset-0 w-full h-full object-cover pointer-events-none z-10" />
                         </div>
                     )}
                     <div className="flex flex-col flex-grow">
@@ -84,7 +84,7 @@ const NewsCard = ({ article, variant = 'default' }) => {
                                 className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
                                 onError={e => { e.target.src = 'https://placehold.co/200x150/f3f4f6/9ca3af?text=News'; }}
                             />
-                            <img src="/overlay.png" alt="" className="absolute inset-0 w-full h-full object-cover pointer-events-none z-10" />
+                            <img src="/overlay-sub.png" alt="" className="absolute inset-0 w-full h-full object-cover pointer-events-none z-10" />
                         </div>
                     )}
                     <div className="flex-1 min-w-0">
@@ -113,7 +113,7 @@ const NewsCard = ({ article, variant = 'default' }) => {
                             className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
                             onError={e => { e.target.src = 'https://placehold.co/400x250/f3f4f6/9ca3af?text=News'; }}
                         />
-                        <img src="/overlay.png" alt="" className="absolute inset-0 w-full h-full object-cover pointer-events-none z-10" />
+                        <img src="/overlay-sub.png" alt="" className="absolute inset-0 w-full h-full object-cover pointer-events-none z-10" />
                     </div>
                 )}
                 <span className={`inline-block ${badgeColor} text-white text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded mb-1.5`}>
