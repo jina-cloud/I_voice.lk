@@ -1,0 +1,12 @@
+2026/02/26-18:32:19.144 18b083 Reusing MANIFEST /Users/jinarathejana/Documents/News WEB/whatsapp-service/.wwebjs_auth/session/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2026/02/26-18:32:19.144 18b083 Recovering log #16
+2026/02/26-18:32:19.165 18b083 Reusing old log /Users/jinarathejana/Documents/News WEB/whatsapp-service/.wwebjs_auth/session/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/000016.log 
+2026/02/26-18:32:23.286 18b085 Level-0 table #21: started
+2026/02/26-18:32:23.302 18b085 Level-0 table #21: 1032078 bytes OK
+2026/02/26-18:32:23.303 18b085 Delete type=0 #16
+2026/02/26-18:32:25.401 18b085 Compacting 1@1 + 1@2 files
+2026/02/26-18:32:25.456 18b085 Generated table #22@1: 46376 keys, 2004253 bytes
+2026/02/26-18:32:25.456 18b085 Compacted 1@1 + 1@2 files => 2004253 bytes
+2026/02/26-18:32:25.456 18b085 compacted to: files[ 0 0 1 0 0 0 0 ]
+2026/02/26-18:32:25.457 18b085 Delete type=2 #21
+2026/02/26-18:32:25.457 18b085 Delete type=2 #18

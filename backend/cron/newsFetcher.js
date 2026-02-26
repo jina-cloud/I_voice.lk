@@ -32,6 +32,9 @@ const fetchNews = async () => {
             let newCount = 0;
             let updateCount = 0;
 
+            const communityId = process.env.WHATSAPP_COMMUNITY_ID;
+            const whatsappServiceURL = process.env.WHATSAPP_SERVICE_URL || 'http://localhost:5002';
+
             for (const article of articles) {
                 const categoryLabel = getCategoryLabel(article.titleEn, article.category);
 
@@ -54,6 +57,21 @@ const fetchNews = async () => {
 
                 if (!updatedArticle) {
                     newCount++;
+
+                    // Send WhatsApp notification for the new article
+                    if (communityId) {
+                        try {
+                            const message = `*${article.titleSi}*\n\nRead more: ${article.share_url || 'https://ivoice.lk/'}\n\n_Ivoice_`;
+
+                            // Send to Microservice instead of calling module directly
+                            await axios.post(`${whatsappServiceURL}/send`, {
+                                chatId: communityId,
+                                message: message
+                            });
+                        } catch (err) {
+                            console.error('[WhatsApp] Error communicating with microservice:', err.message);
+                        }
+                    }
                 } else {
                     updateCount++;
                 }
